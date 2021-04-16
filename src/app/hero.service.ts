@@ -18,7 +18,7 @@ export class HeroService {
 
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
-    this.messageService.add('HeroService: fetched heroes');
+    this.log('HeroService: fetched heroes');
     return heroes;
   }
 
@@ -26,7 +26,12 @@ export class HeroService {
     // For now, assume that a hero with the specified `id` always exists.
     // Error handling will be added in the next step of the tutorial.
     const hero = HEROES.find(h => h.id === id) as Hero;
-    this.messageService.add(`HeroService: fetched hero id=${id}`);
+    this.log(`HeroService: fetched hero id=${id}`);
     return of(hero);
+  }
+
+  /** Log a HeroService message with the MessageService */
+  private log(message: string) {
+    this.messageService.add(`HeroService: ${message}`);
   }
 }
