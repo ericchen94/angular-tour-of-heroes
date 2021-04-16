@@ -12,6 +12,8 @@ import { MessageService } from './message.service';
 })
 export class HeroService {
 
+  private heroesUrl = 'api/heroes'; // URL to web api
+
   constructor(
     private http: HttpClient,
     private messageService: MessageService) { }
@@ -19,7 +21,7 @@ export class HeroService {
   getHeroes(): Observable<Hero[]> {
     const heroes = of(HEROES);
     this.log('HeroService: fetched heroes');
-    return heroes;
+    return this.http.get<Hero[]>(this.heroesUrl);
   }
 
   getHero(id: number): Observable<Hero> {
